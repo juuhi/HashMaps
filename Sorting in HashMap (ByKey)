@@ -1,0 +1,45 @@
+/* A simple code that is used to sort the HashMap by Key. We can also use TreeMap(that is already sorted) but using that will make the
+* process slow, so instead of that we sort the HashMap by the Key. If we will do it by value then , we have to tackle with the null as
+*/ well as duplicate values.
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class NewMap 
+{
+	
+public static void main(String args[])
+{
+	Map<String, Integer> Student = new HashMap<String, Integer>();
+	Student.put("Chandler", 2);
+	Student.put("Anubhav", 4);
+	Student.put("Monica", 1);
+	Student.put("Karishma", 3);
+	
+	System.out.println("Unsorted Map" +Student);
+	
+	Map<String, Integer> sorted = sortByKeys(Student);
+    System.out.println("Sorted Map in Java by key: " + sorted);
+}
+    
+@SuppressWarnings("unchecked")
+public static <K extends Comparable,V extends Comparable> Map<K,V> sortByKeys(Map<K,V> map)
+	{
+        List<K> keys = new LinkedList<K>(map.keySet());
+        Collections.sort(keys);
+      
+        //LinkedHashMap will keep the keys in the order they are inserted
+        //which is currently sorted on natural ordering
+        Map<K,V> sortedMap = new LinkedHashMap<K,V>();
+        for(K key: keys)
+        {
+            sortedMap.put(key, map.get(key));
+        }
+      
+        return sortedMap;
+    }
+}
